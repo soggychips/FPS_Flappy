@@ -10,7 +10,7 @@ public class Engine : MonoBehaviour {
 
 	//GUI Bool Elements
 	bool isNotStarted = true;
-	bool playing = false;
+	bool scoreTicker = false;
 	bool isDead = false;
 	int bestScore = 0;
 	int score = 0;
@@ -35,16 +35,17 @@ public class Engine : MonoBehaviour {
 
 	public void StartGame(){
 		isNotStarted = false;
-		playing = true;
+		scoreTicker = true;
 	}
 	
 	public void Die(){
 		isDead = true;
-		playing = false;
+		scoreTicker = false;
 	}
 	
 	public void Reset(){
 		isDead = false;
+		scoreTicker = true;
 		isNotStarted = true;
 		score = 0;
 		GameObject go = GameObject.FindWithTag("pipecreator");
@@ -80,8 +81,8 @@ public class Engine : MonoBehaviour {
 		if (isNotStarted)
 			GUI.Box (new Rect ((Screen.width / 3), (Screen.height / 8), (Screen.width / 3), (Screen.height / 8)), new GUIContent ("Get Ready"));
 
-		if (playing)
-			GUI.Box (new Rect (20, 20, 50, 50), new GUIContent ("1337"));		
+		if (scoreTicker)
+			GUI.Box (new Rect (20, 20, 50, 50), new GUIContent (""+score+""));		
 
 		if (isDead) {
 			//show score screen gui

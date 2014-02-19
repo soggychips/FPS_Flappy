@@ -5,6 +5,7 @@ public class BirdController : MonoBehaviour {
 	public GameObject pipeCollider;
 	public float boost = 20f;
 	public float forwardMovement = 2f;
+	public int upAngle=45, downAngle=280; //-80 degrees
 
 	public Vector3 startingPosition = Vector3.up*5.0f;
 	[Range (-90,90)] public int zRotation;
@@ -21,6 +22,7 @@ public class BirdController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		transform.position = startingPosition;
+		transform.RotateAround(transform.position,Vector3.forward,upAngle);
 		startingRotation = transform.rotation;
 		Debug.Log ("starting rotation = "+startingRotation);
 		rigidbody.useGravity = false;
@@ -50,12 +52,12 @@ public class BirdController : MonoBehaviour {
 					rigidbody.velocity = new Vector3(rigidbody.velocity.x,0,0);
 				}
 				rigidbody.AddForce(Vector3.up*boost,ForceMode.Impulse);
-				if(transform.rotation.eulerAngles.z<45){
-					rotationAmount = 45 - transform.rotation.eulerAngles.z;
+				if(transform.rotation.eulerAngles.z<upAngle){
+					rotationAmount = upAngle - transform.rotation.eulerAngles.z;
 					transform.RotateAround(transform.position,Vector3.forward,rotationAmount *.5f);
 				}
 				else if(transform.rotation.eulerAngles.z>180){
-					rotationAmount = 360 - (transform.rotation.eulerAngles.z - 45);
+					rotationAmount = 360 - (transform.rotation.eulerAngles.z - upAngle);
 					transform.RotateAround(transform.position,Vector3.forward,rotationAmount *.5f);
 				}
 				
@@ -68,9 +70,8 @@ public class BirdController : MonoBehaviour {
 	void FixedUpdate(){
 		if(!waitingForPlayerToStart){
 			transform.position += Vector3.right*Time.fixedDeltaTime*forwardMovement;
-			
 			if(rigidbody.velocity.y<0){ //falling
-				if(transform.rotation.eulerAngles.z > 280 || transform.rotation.eulerAngles.z<180 ){
+				if(transform.rotation.eulerAngles.z > downAngle || transform.rotation.eulerAngles.z<180 ){
 					if(fallCount<10){
 						Debug.Log ("small fall");
 						transform.RotateAround(transform.position,Vector3.forward,-.5f);
@@ -83,7 +84,7 @@ public class BirdController : MonoBehaviour {
 				fallCount++;
 			}else{
 				//increase rotation on Z until bird is facing in proper up direction
-				if(transform.rotation.eulerAngles.z<45 ){
+				if(transform.rotation.eulerAngles.z<upAngle ){
 					transform.RotateAround(transform.position,Vector3.forward,2);
 				}
 			}
