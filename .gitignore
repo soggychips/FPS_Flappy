@@ -255,7 +255,6 @@ pip-log.txt
 Temp/
 Obj/
 UnityGenerated/
-Library/
  
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
