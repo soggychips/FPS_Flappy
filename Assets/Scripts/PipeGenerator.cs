@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PipeGenerator : MonoBehaviour {
 
-	public Transform bottomPipe;
-	public Transform topPipe;
+	public GameObject bottomPipe;
+	public GameObject topPipe;
 
 	Vector3 topPipeOrigin = Vector3.up + new Vector3(0, 2, 0);
 	Vector3 bottomPipeOrigin = Vector3.zero;
@@ -36,10 +36,17 @@ public class PipeGenerator : MonoBehaviour {
 	}
 
 	void PipeCreator(){
-		
+
+		GameObject pipes = new GameObject();
+		pipes.transform.parent = this.transform;
+		GameObject top, bottom;
+
 		//Instantiate Top and Bottom Pipes
-		Instantiate(bottomPipe, nextBottomPipePosition, Quaternion.identity);
-		Instantiate(topPipe, nextTopPipePosition, Quaternion.identity);
+		bottom = Instantiate(bottomPipe, nextBottomPipePosition, Quaternion.identity) as GameObject;
+		top = Instantiate(topPipe, nextTopPipePosition, Quaternion.identity) as GameObject;
+		bottom.transform.parent = pipes.transform;
+		top.transform.parent = pipes.transform;
+
 		
 		//Reset height for randomization
 		nextTopPipePosition = nextTopPipePosition - randPipeY - randPipeSeparation;
