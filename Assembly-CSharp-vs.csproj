@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BirdController.cs" />
      <Compile Include="Assets\Scripts\Engine.cs" />
+     <Compile Include="Assets\Scripts\PipeCollider.cs" />
      <Compile Include="Assets\Scripts\PipeGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

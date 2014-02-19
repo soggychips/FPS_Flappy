@@ -36,7 +36,9 @@
 -define:ENABLE_PROFILER
 -define:UNITY_EDITOR
 -define:UNITY_EDITOR_OSX
-'Assets/Engine.cs'
+'Assets/Scripts/BirdController.cs'
+'Assets/Scripts/Engine.cs'
+'Assets/Scripts/PipeCollider.cs'
 'Assets/Scripts/PipeGenerator.cs'
 -r:'/Applications/Unity/Unity.app/Contents/Frameworks/Mono/lib/mono/unity/System.Runtime.Serialization.dll'
 -r:'/Applications/Unity/Unity.app/Contents/Frameworks/Mono/lib/mono/unity/System.Xml.Linq.dll'
