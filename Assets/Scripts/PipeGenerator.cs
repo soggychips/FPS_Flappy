@@ -9,7 +9,7 @@ public class PipeGenerator : MonoBehaviour {
 	Vector3 topPipeOrigin = Vector3.up + new Vector3(0, 2, 0);
 	Vector3 bottomPipeOrigin = Vector3.zero;
 
-	Vector3 nextTopPipePosition = Vector3.up*1.5f;
+	Vector3 nextTopPipePosition = Vector3.up;
 	Vector3 nextBottomPipePosition = Vector3.zero;
 
 	//vars for distance between pipes horizontally (new pair), vertically (space between pipes), and space between pipes

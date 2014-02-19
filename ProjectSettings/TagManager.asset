@@ -9,7 +9,7 @@ TagManager:
   - pipeParent
   - floor
   - pipeCollider
-  - 
+  - birdCamera
   - thumb
   - 
   Builtin Layer 0: Default

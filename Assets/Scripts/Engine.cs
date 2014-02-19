@@ -6,6 +6,7 @@ public class Engine : MonoBehaviour {
 
 
 	private PipeCollider pipeCollider;
+	GameObject birdCamera;
 	bool hasPipeCollider;
 
 	//GUI Bool Elements
@@ -24,6 +25,8 @@ public class Engine : MonoBehaviour {
 		Instantiate(pipeCreator);
 		Instantiate(bird);
 		Instantiate (thumb);
+		birdCamera = GameObject.FindWithTag("birdCamera");
+
 	}
 
 	public void AddToCurrentScore(){
@@ -46,7 +49,6 @@ public class Engine : MonoBehaviour {
 	
 	public void Reset(){
 		isDead = false;
-		scoreTicker = true;
 		isNotStarted = true;
 		score = 0;
 		GameObject go = GameObject.FindWithTag("pipecreator");
@@ -65,6 +67,19 @@ public class Engine : MonoBehaviour {
 				hasPipeCollider = true;
 			}
 		}
+
+		//if(Input.GetKey(KeyCode.C)){
+			//if(Input.GetKey(KeyCode.H)){
+				if(Input.GetKey(KeyCode.E)){
+					if(Input.GetKey(KeyCode.A)){
+						if(Input.GetKey(KeyCode.T)){
+							Debug.Log ("Cheat code entered");
+							Destroy(birdCamera);
+						}
+					}
+				}
+			//}
+		//}
 		//guitesting stuff
 		/*
 		if(Input.GetKeyDown(KeyCode.G)) {
@@ -80,16 +95,16 @@ public class Engine : MonoBehaviour {
 	void OnGUI () {
 
 		if (isNotStarted)
-			GUI.Box (new Rect ((Screen.width / 3), (Screen.height / 8), (Screen.width / 3), (Screen.height / 8)), new GUIContent ("Get Ready"));
+			GUI.Box (new Rect ((Screen.width / 3), (Screen.height / 8), (Screen.width / 3), (Screen.height / 8)), new GUIContent ("First Person\nFlappy Bird\nPress Space To Jump"));
 
 		if (scoreTicker)
-			GUI.Box (new Rect (20, 20, 50, 50), new GUIContent (""+score+""));		
+			GUI.Box (new Rect (Screen.width/2-25, 20, 50, 50), new GUIContent (""+score+""));		
 
 		if (isDead) {
 			//show score screen gui
 			GUI.Box (new Rect ((Screen.width / 3), (Screen.height / 8), (Screen.width / 3), (Screen.height / 8)), new GUIContent ("Game Over"));
 			GUI.Box (new Rect ((Screen.width / 3), (Screen.height / 8 * 2), (Screen.width / 3), (Screen.height / 8)), new GUIContent ("Score" + "\t\t\t\t\t\t\t\t\t"+ "Best" + "\n" + 
-			                                                                                                                          score + "\t\t\t\t\t\t\t\t\t\t" + bestScore));
+			                                                                                                                          score + "\t\t\t\t\t\t\t\t\t\t" + bestScore+"\nPress 'Space' Twice..."));
 		}
 	}
 }

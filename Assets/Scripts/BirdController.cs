@@ -16,7 +16,7 @@ public class BirdController : MonoBehaviour {
 	private bool waitingForPlayerToStart, scoreboard;
 
 	private Engine engine;
-	private int fallCount=0;
+	private int fallCount=0, scoreShowingCount = 0;
 	private float rotationAmount;
 	
 	void Awake(){
@@ -36,13 +36,16 @@ public class BirdController : MonoBehaviour {
 
 	void Update(){
 		if(scoreboard){
-			if(Input.GetKeyDown(KeyCode.Space)){
+			if(Input.GetKeyDown(KeyCode.Space) && scoreShowingCount<1){
+				scoreShowingCount++;
+			}else if(Input.GetKeyDown(KeyCode.Space)){
 				engine.Reset();
 				BirdReset();
 				scoreboard = false;
 			}
 		}else if(waitingForPlayerToStart){
 			if(Input.GetKeyDown(KeyCode.Space)){
+				scoreShowingCount = 0;
 				Debug.Log ("Starting Game");
 				engine.StartGame();
 				waitingForPlayerToStart = false;
@@ -50,6 +53,7 @@ public class BirdController : MonoBehaviour {
 				rigidbody.useGravity = true;
 				rigidbody.AddForce(Vector3.right*boost,ForceMode.Force);
 			}
+
 		}else{
 			if(Input.GetKeyDown(KeyCode.Space)){
 				if(rigidbody.velocity.y<0){
