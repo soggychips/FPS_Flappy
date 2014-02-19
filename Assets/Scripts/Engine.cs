@@ -10,6 +10,8 @@ public class Engine : MonoBehaviour {
 	bool playing = false;
 	bool isDead = false;
 
+	int score = 0;
+
 	// Use this for initialization
 	void Start () {
 		Instantiate(camera);

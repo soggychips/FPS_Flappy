@@ -58,15 +58,19 @@ public class BirdController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(){
-		Debug.Log ("Game Over");
-		rigidbody.useGravity = false;
-		waitingForPlayerToStart = true;
-		rigidbody.velocity=Vector3.zero;
-		transform.position = startingPosition;
-		rigidbody.rotation = startingRotation;
-		rigidbody.freezeRotation = true;
-		Debug.Log ("current rotation = "+transform.rotation);
+			Debug.Log ("Game Over");
+			rigidbody.useGravity = false;
+			waitingForPlayerToStart = true;
+			rigidbody.velocity = Vector3.zero;
+			transform.position = startingPosition;
+			rigidbody.rotation = startingRotation;
+			rigidbody.freezeRotation = true;
+			Debug.Log ("current rotation = " + transform.rotation);
+	}
 
+	void OnTriggerEnter(Collider scorebox){
+		Debug.Log ("Score Increased");
+		Destroy (scorebox.gameObject);
 	}
 
 
