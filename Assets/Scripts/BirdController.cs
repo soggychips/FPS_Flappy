@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class BirdController : MonoBehaviour {
-
+	public GameObject pipeCollider;
 	public float boost = 20f;
 	public float forwardMovement = 2f;
 
@@ -15,8 +15,10 @@ public class BirdController : MonoBehaviour {
 	void Start () {
 		transform.position = startingPosition;
 		startingRotation = transform.rotation;
+		Debug.Log ("starting rotation = "+startingRotation);
 		rigidbody.useGravity = false;
 		waitingForPlayerToStart = true;
+		Instantiate(pipeCollider);
 	}
 
 	void Update(){
@@ -24,29 +26,34 @@ public class BirdController : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.Space)){
 				Debug.Log ("Starting Game");
 				waitingForPlayerToStart = false;
+				rigidbody.freezeRotation = false;
 				rigidbody.useGravity = true;
 				rigidbody.AddForce(Vector3.right*boost,ForceMode.Force);
 			}
 		}else{
 			if(Input.GetKeyDown(KeyCode.Space)){
 				if(rigidbody.velocity.y<0){
-					Debug.Log("Falling, extra boost");
-					rigidbody.AddForce(Vector3.up*boost*2.5f,ForceMode.Impulse);
-				}else{
-					rigidbody.AddForce(Vector3.up*boost,ForceMode.Impulse);
+					rigidbody.velocity = new Vector3(rigidbody.velocity.x,0,0);
 				}
+				rigidbody.AddForce(Vector3.up*boost,ForceMode.Impulse);
 			}
 		}
 	}
 
 	void FixedUpdate(){
-		if(!waitingForPlayerToStart)
+		if(!waitingForPlayerToStart){
 			transform.position += Vector3.right*Time.fixedDeltaTime*forwardMovement;
 
-		if(rigidbody.velocity.y<0){ //falling
-
-		}else{
-
+			if(rigidbody.velocity.y<0){ //falling
+				//Debug.Log ("z rotation = " + transform.rotation.z);
+				/*if(transform.rotation.z > -80){
+					transform.RotateAround(transform.position,Vector3.forward,-1);
+				}*/
+			}else{
+				//if(transform.rotation.eulerAngles.z < 80){
+				//	transform.RotateAround(transform.position,Vector3.forward,+1);
+				//}
+			}
 		}
 	}
 
@@ -56,8 +63,13 @@ public class BirdController : MonoBehaviour {
 		waitingForPlayerToStart = true;
 		rigidbody.velocity=Vector3.zero;
 		transform.position = startingPosition;
-		transform.rotation = startingRotation;
+		rigidbody.rotation = startingRotation;
+		rigidbody.freezeRotation = true;
+		Debug.Log ("current rotation = "+transform.rotation);
+
 	}
+
+
 
 
 }
