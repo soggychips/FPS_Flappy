@@ -21,7 +21,22 @@ public class Engine : MonoBehaviour {
 		Instantiate(pipeCreator);
 		Instantiate(bird);
 	}
+
+	public void StartGame(){
+		isNotStarted = false;
+		playing = true;
+	}
 	
+	public void Die(){
+		isDead = true;
+		playing = false;
+	}
+	
+	public void Reset(){
+		isDead = false;
+		isNotStarted = true;
+	}
+
 	// Update is called once per frame
 	void Update () {
 	
