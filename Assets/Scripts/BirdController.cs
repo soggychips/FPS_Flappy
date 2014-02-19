@@ -98,6 +98,7 @@ public class BirdController : MonoBehaviour {
 		rigidbody.freezeRotation = true;
 		Debug.Log ("current rotation = "+transform.rotation);
 		engine.Die();
+		engine.CompareCurrentScoreToBest();
 		scoreboard = true;
 		
 	}
@@ -111,6 +112,7 @@ public class BirdController : MonoBehaviour {
 
 	void OnTriggerEnter(Collider scorebox){
 		Debug.Log ("Score Increased");
+		engine.AddToCurrentScore();
 		Destroy (scorebox.gameObject);
 	}
 

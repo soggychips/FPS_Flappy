@@ -1,9 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BirdController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PipeCollider.cs">
     <Files>
-      <File FileName="Assets/Scripts/BirdController.cs" Line="33" Column="40" />
-      <File FileName="../../../Desktop/scripts/BirdController.cs" Line="41" Column="24" />
+      <File FileName="Assets/Scripts/Engine.cs" Line="63" Column="21" />
+      <File FileName="Assets/Scripts/BirdController.cs" Line="25" Column="1" />
+      <File FileName="Assets/Scripts/PipeGenerator.cs" Line="48" Column="1" />
+      <File FileName="Assets/Scripts/PipeCollider.cs" Line="25" Column="91" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -21,6 +21,10 @@ public class PipeCollider : MonoBehaviour {
 		transform.position = bird.transform.position + new Vector3(-5,1,0);
 	}
 
+	public void UpdatePipeGenReference(){
+		pipeG = GameObject.FindGameObjectWithTag ("pipecreator").GetComponent<PipeGenerator> ();
+	}
+
 	void OnCollisionEnter (Collision coll) {
 		//Destroy parent pipe object
 
