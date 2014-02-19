@@ -2,14 +2,18 @@
 using System.Collections;
 
 public class BirdController : MonoBehaviour {
+
 	public GameObject pipeCollider;
+
 	public float boost = 20f;
 	public float forwardMovement = 2f;
 
 	public Vector3 startingPosition = Vector3.up*5.0f;
 	[Range (-90,90)] public int zRotation;
 	public Quaternion startingRotation;
+
 	private bool waitingForPlayerToStart, scoreboard;
+
 	private Engine engine;
 	private int fallCount=0;
 	private float rotationAmount;
@@ -58,8 +62,7 @@ public class BirdController : MonoBehaviour {
 					rotationAmount = 360 - (transform.rotation.eulerAngles.z - 45);
 					transform.RotateAround(transform.position,Vector3.forward,rotationAmount *.5f);
 				}
-				
-				
+
 				fallCount = 0;
 			}
 		}
@@ -72,11 +75,11 @@ public class BirdController : MonoBehaviour {
 			if(rigidbody.velocity.y<0){ //falling
 				if(transform.rotation.eulerAngles.z > 280 || transform.rotation.eulerAngles.z<180 ){
 					if(fallCount<10){
-						Debug.Log ("small fall");
+						//Debug.Log ("small fall");
 						transform.RotateAround(transform.position,Vector3.forward,-.5f);
 					}else{
 						//drop rotation until it's facing is almost down (-80 degrees?)
-						Debug.Log ("larger fall");
+						//Debug.Log ("larger fall");
 						transform.RotateAround(transform.position,Vector3.forward,-2);
 					}
 				}
@@ -113,8 +116,4 @@ public class BirdController : MonoBehaviour {
 		Debug.Log ("Score Increased");
 		Destroy (scorebox.gameObject);
 	}
-
-
-
-
 }

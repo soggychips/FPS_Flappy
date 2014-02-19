@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Engine : MonoBehaviour {
-	public GameObject camera,light,bird,floor,background,pipeCreator;
+	public GameObject camera,light,bird,floor,background,pipeCreator, thumb;
 
 
 	//GUI Bool Elements
@@ -20,6 +20,7 @@ public class Engine : MonoBehaviour {
 		Instantiate(background);
 		Instantiate(pipeCreator);
 		Instantiate(bird);
+		Instantiate (thumb);
 	}
 
 	public void StartGame(){
