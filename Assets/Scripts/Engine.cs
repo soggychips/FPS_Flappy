@@ -5,11 +5,14 @@ public class Engine : MonoBehaviour {
 	public GameObject camera,light,bird,floor,background,pipeCreator, thumb;
 
 
+	private PipeCollider pipeCollider;
+	bool hasPipeCollider;
+
 	//GUI Bool Elements
 	bool isNotStarted = true;
-	bool playing = false;
+	bool scoreTicker = false;
 	bool isDead = false;
-
+	int bestScore = 0;
 	int score = 0;
 
 	// Use this for initialization
@@ -23,24 +26,45 @@ public class Engine : MonoBehaviour {
 		Instantiate (thumb);
 	}
 
+	public void AddToCurrentScore(){
+		score++;
+	}
+
+	public void CompareCurrentScoreToBest(){
+		if(score>bestScore) bestScore = score;
+	}
+
 	public void StartGame(){
 		isNotStarted = false;
-		playing = true;
+		scoreTicker = true;
 	}
 	
 	public void Die(){
 		isDead = true;
-		playing = false;
+		scoreTicker = false;
 	}
 	
 	public void Reset(){
 		isDead = false;
+		scoreTicker = true;
 		isNotStarted = true;
+		score = 0;
+		GameObject go = GameObject.FindWithTag("pipecreator");
+		if(go==null) Debug.Log ("pipecreator null");
+		DestroyImmediate (go);
+		Instantiate(pipeCreator);
+		pipeCollider.UpdatePipeGenReference();
 	}
 
 	// Update is called once per frame
 	void Update () {
-	
+		if(!hasPipeCollider){
+			GameObject go = GameObject.FindWithTag("pipeCollider");
+			if(go!=null){
+				pipeCollider = GameObject.FindWithTag("pipeCollider").GetComponent<PipeCollider>();
+				hasPipeCollider = true;
+			}
+		}
 		//guitesting stuff
 		/*
 		if(Input.GetKeyDown(KeyCode.G)) {
@@ -58,14 +82,14 @@ public class Engine : MonoBehaviour {
 		if (isNotStarted)
 			GUI.Box (new Rect ((Screen.width / 3), (Screen.height / 8), (Screen.width / 3), (Screen.height / 8)), new GUIContent ("Get Ready"));
 
-		if (playing)
-			GUI.Box (new Rect (20, 20, 50, 50), new GUIContent ("1337"));		
+		if (scoreTicker)
+			GUI.Box (new Rect (20, 20, 50, 50), new GUIContent (""+score+""));		
 
 		if (isDead) {
 			//show score screen gui
 			GUI.Box (new Rect ((Screen.width / 3), (Screen.height / 8), (Screen.width / 3), (Screen.height / 8)), new GUIContent ("Game Over"));
-			GUI.Box (new Rect ((Screen.width / 3), (Screen.height / 8 * 2), (Screen.width / 3), (Screen.height / 8)), new GUIContent ("Score" + "\t\t\t\t\t\t\t\t\t" + "Best" + "\n" + 
-			                                                                                                                          "1337" + "\t\t\t\t\t\t\t\t\t\t" + "9001"));
+			GUI.Box (new Rect ((Screen.width / 3), (Screen.height / 8 * 2), (Screen.width / 3), (Screen.height / 8)), new GUIContent ("Score" + "\t\t\t\t\t\t\t\t\t"+ "Best" + "\n" + 
+			                                                                                                                          score + "\t\t\t\t\t\t\t\t\t\t" + bestScore));
 		}
 	}
 }
