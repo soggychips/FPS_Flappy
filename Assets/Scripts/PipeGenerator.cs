@@ -19,7 +19,7 @@ public class PipeGenerator : MonoBehaviour {
 
 	void Start() {
 
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 5; i++)
 						PipeCreator ();
 
 	}
@@ -35,17 +35,18 @@ public class PipeGenerator : MonoBehaviour {
 
 	}
 
-	void PipeCreator(){
+	public void PipeCreator(){
 
-		GameObject pipes = new GameObject();
-		pipes.transform.parent = this.transform;
+		//GameObject pipes = new GameObject();
+		//pipes.tag = "pipe";
+		//pipes.transform.parent = this.transform;
 		GameObject top, bottom;
 
 		//Instantiate Top and Bottom Pipes
 		bottom = Instantiate(bottomPipe, nextBottomPipePosition, Quaternion.identity) as GameObject;
 		top = Instantiate(topPipe, nextTopPipePosition, Quaternion.identity) as GameObject;
-		bottom.transform.parent = pipes.transform;
-		top.transform.parent = pipes.transform;
+		bottom.transform.parent = this.transform;
+		top.transform.parent = this.transform;
 
 		
 		//Reset height for randomization
